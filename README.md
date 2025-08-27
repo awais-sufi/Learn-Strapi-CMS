@@ -1,12 +1,19 @@
-Epic Next Course
-You can find the published articles following links below.
+# 🚀 Epic Next Course
 
-Getting Started with project
-Building Out The Hero Section
-Building Out The Features Section, TopNavigation and Footer
-Building Out the Register and Sign In Page
-Building out the the Dashboard page
-Get Video Transcript with OpenAI Function
-Strapi CRUD permissions
-Search & pagination
-You can findt the video playlist here
+This repository contains the source code for the **Epic Next Course** project.  
+Follow along with the lessons to build a complete Next.js + Strapi application.
+
+---
+
+## 📚 Course Content
+
+- ✅ Getting Started with Project  
+- ✅ Building Out the Hero Section  
+- ✅ Building Out the Features Section, Top Navigation, and Footer  
+- ✅ Building Out the Register and Sign In Page  
+- ✅ Building Out the Dashboard Page  
+- ✅ Get Video Transcript with OpenAI Function  
+- ✅ Strapi CRUD Permissions  
+- ✅ Search & Pagination  
+
+---
