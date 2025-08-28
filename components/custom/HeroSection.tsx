@@ -1,6 +1,8 @@
 import Link from "next/link";
-import Image from "next/image";
+import { services } from "@/data/services";
 import type { TImage, TLink } from "@/types";
+
+import { StrapiImage } from "./strapi-image";
 
 export interface IHeroSectionProps {
   id: number;
@@ -23,31 +25,29 @@ const styles = {
     "mt-8 inline-flex items-center justify-center px-6 py-3 text-base font-medium text-black bg-white rounded-md shadow hover:bg-gray-100 transition-colors",
 };
 
-export function HeroSection({ data }: { data: IHeroSectionProps }) {
+export async function HeroSection({ data }: { data: IHeroSectionProps }) {
   if (!data) return null;
+  const user = await services.auth.getUserMeService();
+  const userLoggedIn = user.success;
 
-  const { heading, subHeading, link } = data;
-  const strapiBaseUrl = "http://localhost:1337";
-
-  console.dir(data, { depth: null });
+  const { heading, subHeading, image, link } = data;
   return (
     <header className={styles.header}>
-      <Image
-        alt="Background"
-        className={styles.backgroundImage}
+      <StrapiImage
+        alt={image.alternativeText ?? "no alternative text"}
+        className="absolute inset-0 object-cover w-full h-full aspect/16:9"
+        src={image.url}
         height={1080}
-        src={`${strapiBaseUrl}/uploads/coffee_art_d2ab4406bf.jpeg`}
-        style={{
-          aspectRatio: "1920/1080",
-          objectFit: "cover",
-        }}
         width={1920}
       />
       <div className={styles.overlay}>
         <h1 className={styles.heading}>{heading}</h1>
         <p className={styles.subheading}>{subHeading}</p>
-        <Link className={styles.button} href={link.url}>
-          {link.text}
+        <Link
+          className={styles.button}
+          href={userLoggedIn ? "/dashboard" : link.url}
+        >
+          {userLoggedIn ? "Dashboard" : link.text}
         </Link>
       </div>
     </header>
