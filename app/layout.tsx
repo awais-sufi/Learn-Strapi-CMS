@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { loaders } from "@/data/loaders";
+import { validateApiResponse } from "@/lib/error-handler";
+import { Header } from "@/components/custom/header";
+import { Footer } from "@/components/custom/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,23 +16,32 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Learn Strapi CMS",
-  description:
-    "Strapi is an open-source headless CMS built with Node.js. It lets developers easily create, manage, and expose content through REST or GraphQL APIs, giving full control over data, customization, and deployment.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const metadata = await loaders.getMetaData();
 
-export default function RootLayout({
+  return {
+    title: metadata?.data?.title ?? "Epic Next Course",
+    description: metadata?.data?.description ?? "Epic Next Course",
+  };
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const globalDataResponse = await loaders.getGlobalData();
+  const globalData = validateApiResponse(globalDataResponse, "global page");
+  console.dir(globalData, { depth: null });
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Header data={globalData?.header} />
         {children}
+        <Footer data={globalData?.footer} />
       </body>
     </html>
   );
