@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
         port: "1337",
         pathname: "/uploads/**/*",
       },
+      {
+        protocol: "https",
+        hostname: "supreme-badge-11bbc43c7d.media.strapiapp.com",
+      },
     ],
   },
   experimental: {
