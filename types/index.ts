@@ -74,9 +74,10 @@ export type TMetaData = {
 
 export type TSummary = {
   documentId: string;
+  title: string;
+  summary: string;
   videoId: string;
   userId: string;
-  title: string;
   content: string;
   createdAt: string;
   updatedAt: string;

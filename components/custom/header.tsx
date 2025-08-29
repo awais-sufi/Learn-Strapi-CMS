@@ -6,6 +6,7 @@ import { services } from "@/data/services";
 import { Logo } from "@/components/custom/logo";
 import { Button } from "@/components/ui/button";
 import { LoggedInUser } from "@/components/custom/logged-in-user";
+import { SummaryForm } from "@/components/forms/summary-form";
 
 const styles = {
   header:
@@ -26,6 +27,7 @@ export async function Header({ data }: IHeaderProps) {
   return (
     <div className={styles.header}>
       <Logo text={logoText.text} />
+      {user.success && <SummaryForm />}
       <div className={styles.actions}>
         {user.success && user.data ? (
           <LoggedInUser userData={user.data} />
