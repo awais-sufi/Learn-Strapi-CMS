@@ -33,7 +33,6 @@ export default async function RootLayout({
 }>) {
   const globalDataResponse = await loaders.getGlobalData();
   const globalData = validateApiResponse(globalDataResponse, "global page");
-  console.dir(globalData, { depth: null });
 
   return (
     <html lang="en">
